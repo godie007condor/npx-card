@@ -12,7 +12,7 @@ const request = require("request");
 const path = require("path");
 const ora = require("ora");
 const cliSpinners = require("cli-spinners");
-
+var figlet = require('figlet');
 clear();
 
 //! importing User Data from data.json
@@ -98,32 +98,41 @@ const data = {
     labelCard: chalk.white.bold("       Card:"),
 };
 
-const me = boxen(
-    [
-        `${data.name}`,
-        ``,
-        `${data.labelWork}  ${data.work}`,
-        ``,
-        `${data.labelTwitter}  ${data.twitter}`,
-        `${data.labelGitHub}  ${data.github}`,
-        `${data.labelLinkedIn}  ${data.linkedin}`,
-        `${data.labelWeb}  ${data.web}`,
-        ``,
-        `${data.labelCard}  ${data.npx}`,
-        ``,
-        `${chalk.italic("I am a person very passionate about technology, currently I have")}`,
-        `${chalk.italic("experience in different sectors of the industry. I like teamwork and")}`,
-        `${chalk.italic("learn more every day.")}`,
-    ].join("\n"),
-    {
-        margin: 1,
-        float: "center",
-        padding: 1,
-        borderStyle: "single",
-        borderColor: "green",
+figlet('godie007condor', function(err, banner) {
+    if (err) {
+        console.log('Something went wrong...');
+        console.dir(err);
+        return;
     }
-);
+    const me = boxen(
+        [
+            `${banner}`,
+            ``,
+            `${data.name}`,
+            ``,
+            `${data.labelWork}  ${data.work}`,
+            ``,
+            `${data.labelTwitter}  ${data.twitter}`,
+            `${data.labelGitHub}  ${data.github}`,
+            `${data.labelLinkedIn}  ${data.linkedin}`,
+            `${data.labelWeb}  ${data.web}`,
+            ``,
+            `${data.labelCard}  ${data.npx}`,
+            ``,
+            `${chalk.italic("I am a person very passionate about technology, currently I have")}`,
+            `${chalk.italic("experience in different sectors of the industry. I like teamwork and")}`,
+            `${chalk.italic("learn more every day.")}`,
+        ].join("\n"),
+        {
+            margin: 1,
+            float: "center",
+            padding: 1,
+            borderStyle: "single",
+            borderColor: "green",
+        }
+    );
+    console.log(me);
+});
 
-console.log(me);
 
 prompt(questions).then(answer => answer.action());
